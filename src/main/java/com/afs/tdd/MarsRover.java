@@ -2,7 +2,7 @@ package com.afs.tdd;
 
 public class MarsRover {
 
-    private final Location location;
+    private  Location location;
 
     public MarsRover(Location location) {
         this.location = location;
@@ -11,37 +11,40 @@ public class MarsRover {
     public void executeCommand(Command givenCommand) {
         Direction newDirection = null;
         if(givenCommand == Command.MOVE) {
-            if(location.getDirection() == Direction.NORTH){
-                location.setY(location.getY() + 1);
-            }
-            if (location.getDirection() == Direction.SOUTH) {
-                location.setY(location.getY() - 1);
-            }
-            if (location.getDirection() == Direction.WEST) {
-                location.setX(location.getX() - 1);
-            }
-            if (location.getDirection() == Direction.EAST) {
-                location.setX(location.getX() + 1);
-            }
+            move();
         }
         if (givenCommand == Command.TURN_LEFT) {
             newDirection = turnLeft();
         }
     }
 
+    private void move(){
+            int x = location.getX();
+            int y = location.getY();
+            Direction direction = location.getDirection();
+
+            switch (direction) {
+                case NORTH:
+                    y++;
+                    break;
+                case EAST:
+                    x++;
+                    break;
+                case SOUTH:
+                    y--;
+                    break;
+                case WEST:
+                    x--;
+                    break;
+            }
+
+            location = new Location(x, y, direction);
+    }
+
     private Direction turnLeft() {
         Direction currentDirection = location.getDirection();
         Direction newDirection = null;
 
-        if (currentDirection == Direction.NORTH) {
-            newDirection = Direction.WEST;
-        } else if (currentDirection == Direction.EAST) {
-            newDirection = Direction.NORTH;
-        } else if (currentDirection == Direction.SOUTH) {
-            newDirection = Direction.EAST;
-        } else if (currentDirection == Direction.WEST) {
-            newDirection = Direction.SOUTH;
-        }
 
         return newDirection;
     }
