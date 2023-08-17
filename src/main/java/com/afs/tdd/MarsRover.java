@@ -9,12 +9,11 @@ public class MarsRover {
     }
 
     public void executeCommand(Command givenCommand) {
-        Direction newDirection = null;
         if(givenCommand == Command.MOVE) {
             move();
         }
         if (givenCommand == Command.TURN_LEFT) {
-            newDirection = turnLeft();
+             turnLeft();
         }
     }
 
@@ -24,29 +23,28 @@ public class MarsRover {
             Direction direction = location.getDirection();
 
             switch (direction) {
-                case NORTH:
-                    y++;
-                    break;
-                case EAST:
-                    x++;
-                    break;
-                case SOUTH:
-                    y--;
-                    break;
-                case WEST:
-                    x--;
-                    break;
+                case NORTH: y++;
+                break;
+                case EAST: x++;
+                break;
+                case SOUTH: y--;
+                break;
+                case WEST: x--;
+                break;
             }
 
             location = new Location(x, y, direction);
     }
 
-    private Direction turnLeft() {
+    private void turnLeft() {
         Direction currentDirection = location.getDirection();
         Direction newDirection = null;
 
+        if (currentDirection == Direction.NORTH) {
+            newDirection = Direction.WEST;
+        }
 
-        return newDirection;
+        location = new Location(location.getX(), location.getY(), newDirection);
     }
 
     public Location getCurrentLocation() {
