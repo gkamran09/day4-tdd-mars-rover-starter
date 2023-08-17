@@ -3,6 +3,9 @@ package com.afs.tdd;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 class MarsRoverTest {
     @Test
     void should_change_to_location_0_1_N_when_executeCommand_given_0_0_North_and_command_Move() {
@@ -184,6 +187,23 @@ class MarsRoverTest {
         Location currentLocation = marsRover.getCurrentLocation();
 
         // Then
+        Assertions.assertEquals(Direction.NORTH, currentLocation.getDirection());
+    }
+
+    @Test
+    void should_change_location_to_minus_1_1_North_when_executeBatchCommands_given_initial_location_0_0_North_and_commands_MLMR() {
+        // Given
+        Location initialLocation = new Location(0, 0, Direction.NORTH);
+        List<Command> commandList = Arrays.asList(Command.MOVE, Command.TURN_LEFT, Command.MOVE, Command.TURN_RIGHT);
+        MarsRover marsRover = new MarsRover(initialLocation);
+
+        // When
+        marsRover.executeBatchCommands(commandList);
+        Location currentLocation = marsRover.getCurrentLocation();
+
+        // Then
+        Assertions.assertEquals(-1, currentLocation.getX());
+        Assertions.assertEquals(1, currentLocation.getY());
         Assertions.assertEquals(Direction.NORTH, currentLocation.getDirection());
     }
 }
