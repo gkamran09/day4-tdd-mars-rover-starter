@@ -49,6 +49,9 @@ public class MarsRover {
         if (currentDirection == Direction.WEST) {
             newDirection = Direction.SOUTH;
         }
+        if (currentDirection == Direction.EAST) {
+            newDirection = Direction.NORTH;
+        }
 
         location = new Location(location.getX(), location.getY(), newDirection);
     }
