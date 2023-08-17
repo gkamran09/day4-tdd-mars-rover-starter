@@ -15,7 +15,12 @@ public class MarsRover {
         if (givenCommand == Command.TURN_LEFT) {
              turnLeft();
         }
+        if (givenCommand == Command.TURN_RIGHT) {
+            turnRight();
+        }
     }
+
+
 
     private void move(){
             int x = location.getX();
@@ -54,6 +59,8 @@ public class MarsRover {
         }
 
         location = new Location(location.getX(), location.getY(), newDirection);
+    }
+    private void turnRight() {
     }
 
     public Location getCurrentLocation() {
