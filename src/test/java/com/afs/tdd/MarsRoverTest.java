@@ -141,5 +141,4 @@ class MarsRoverTest {
         // Then
         Assertions.assertEquals(Direction.EAST, currentLocation.getDirection());
     }
-
 }
